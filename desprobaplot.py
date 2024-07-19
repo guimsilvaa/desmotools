@@ -117,10 +117,16 @@ def plot_pdf(rmsd_values_list, structure_types, names):
     
 def calculate_metrics(rmsd_values):
     if rmsd_values:
+        q1 = np.percentile(rmsd_values, 25)
+        q3 = np.percentile(rmsd_values, 75)
+        iqr = q3 - q1
         metrics = {
             "Average": np.mean(rmsd_values),
             "Median": np.median(rmsd_values),
             "Standard Deviation": np.std(rmsd_values),
+            "Interquartile Range": iqr,
+            "First Quartile (Q1)": q1,
+            "Third Quartile (Q3)": q3,
             "Minimum Value": np.min(rmsd_values),
             "Maximum Value": np.max(rmsd_values)
         }
